@@ -18,9 +18,12 @@ app.use(morgan("dev"));
 
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "http://localhost:5173",
+      "https://taskflow-frontend-production-1b90.up.railway.app"
+    ],
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: [
       "Content-Type",
       "x-session-id",
@@ -30,7 +33,7 @@ app.use(
     ],
   })
 );
-
+app.options("*", cors()); // handle preflight requests
 app.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
