@@ -33,7 +33,7 @@ app.use(
     ],
   })
 );
-app.options("*", cors()); // handle preflight requests
+
 app.get("/health", (req, res) => {
   res.status(200).json({
     success: true,
